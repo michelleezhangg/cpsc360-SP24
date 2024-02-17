@@ -39,11 +39,11 @@
 ### Run the helloworld code
 1. **Download code**
   - Under this github repo, go to Code -> Download Zip
-  - Alternatively, ***if you are familiar with git/github***, you may also clone the code from: https://github.com/trudiQ/cpsc360-SP23.git (**pull only**)
+  - Alternatively, ***if you are familiar with git/github***, you may also clone the code from: https://github.com/trudiQ/cpsc360-SP24.git (**pull only**)
     - if you want to save and upload your changes, ***fork it to your own repo before changing anything***
 2. **Open VScode**
   - Install Python extention 
-  - Open code folder, e.g.,'cpsc360-SP23'
+  - Open code folder, e.g.,'cpsc360-SP24'
   - Select Interpreter: Python 3.8.x ('cpsc360') *# 'cpsc360' is the conda environment you just created*
 3. **Run python file 'helloWorld.py'**
   - Rotate the object: Hold the left-button of your mouse and drag the mouse (trackpad may also work!)
