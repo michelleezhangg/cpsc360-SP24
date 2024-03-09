@@ -95,7 +95,6 @@ def drawRotationAxis():
 # For Assignment 5: Complete the two functions below
 # Q1:
 def spinningTransform(theta):
-
     glTranslatef(7.0, 7.0, 7.0) # translate the cube back to its original position (7,7,7)
     glRotatef(theta, 0.0, 1.0, 0.0) # rotate the cube at the origin by parameter theta around the y-axis
     glTranslatef(-7.0, -7.0, -7.0) # translate the cube to the origin to prepare for rotation
