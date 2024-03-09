@@ -42,7 +42,7 @@ def draw_Scarecrow():                                                  # This is
 
     # nose
     glPushMatrix()
-    glTranslatef(0.0, 12.5, 2.5) # transltaed the nose up 12.5 units +y-axis and out 2.5 units +z-axis
+    glTranslatef(0.0, 12.5, 2.5) # translated the nose up 12.5 units +y-axis and out 2.5 units +z-axis
     glColor3f(1.0, 0.0, 0.0)
     gluCylinder(quadratic, 0.3, 0.0, 1.8, 32, 32)
     glPopMatrix()
