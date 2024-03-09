@@ -33,55 +33,55 @@ def draw_Scarecrow():                                                  # This is
     quadratic = gluNewQuadric()
     gluQuadricDrawStyle(quadratic, GLU_FILL)  
 
-    # TODO: Head (sphere: radius=2.5) 
+    # head
     glPushMatrix()
-    glTranslatef(0.0, 12.5, 0.0)
+    glTranslatef(0.0, 12.5, 0.0) # translated sphere up 12.5 units +y-axis
     glColor3f(0.0, 1.0, 0.0)
     gluSphere(quadratic, 2.5, 32, 32)
     glPopMatrix()
 
-    # TODO: Nose (cylinder: base-radius=0.3, top-radius=0, length=2)
+    # nose
     glPushMatrix()
-    glTranslatef(0.0, 12.5, 2.5)
+    glTranslatef(0.0, 12.5, 2.5) # transltaed the nose up 12.5 units +y-axis and out 2.5 units +z-axis
     glColor3f(1.0, 0.0, 0.0)
     gluCylinder(quadratic, 0.3, 0.0, 1.8, 32, 32)
     glPopMatrix()
 
-    # TODO: Torso (cylinder: radius=2.5, length=10)
+    # torso
     glPushMatrix()
-    glRotatef(-90.0, 1.0, 0.0, 0.0)
+    glRotatef(-90.0, 1.0, 0.0, 0.0) # rotated the torso around the x-axis by 90 degrees clockwise
     glColor3f(1.0, 1.0, 0.0)
     gluCylinder(quadratic, 2.5, 2.5, 10.0, 32, 32)
     glPopMatrix()
 
-    # TODO: Left Leg (cylinders: radius=1.0, length=12)
+    # left leg
     glPushMatrix()
-    glTranslatef(-1.2, 0.0, 0.0)
-    glRotatef(90.0, 1.0, 0.0, 0.0)
+    glTranslatef(-1.2, 0.0, 0.0) # then translated the leg to the left (-x-axis) by 1.2 units
+    glRotatef(90.0, 1.0, 0.0, 0.0) # first rotated the leg 90 degrees counterclockwise around the x-axis
     glColor3f(1.0, 0.0, 0.0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
     glPopMatrix()
 
-    # TODO: Right Leg (cylinders: radius=1.0, length=12)
+    # right leg
     glPushMatrix()
-    glTranslatef(1.2, 0.0, 0.0)
-    glRotatef(90.0, 1.0, 0.0, 0.0)
+    glTranslatef(1.2, 0.0, 0.0) # then translated the leg to the right (+x-axis) by 1.2 units
+    glRotatef(90.0, 1.0, 0.0, 0.0) # first rotated the leg 90 degrees counterclockwise around the x-axis
     glColor3f(1.0, 0.0, 0.0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
     glPopMatrix()
 
-    # TODO: Left Arm (cylinders: radius=1.0, length=10)
+    # left arm
     glPushMatrix()
-    glTranslatef(2.4, 9.0, 0.0)
-    glRotate(90.0, 0.0, 1.0, 0.0)
+    glTranslatef(2.4, 9.0, 0.0) # then translated the arm to the right (+x-axis) 2.4 units and up 9.0 units (+y-axis)
+    glRotatef(90.0, 0.0, 1.0, 0.0) # first rotated the arm 90 degrees counterclockwise around the y-axis
     glColor3f(0.0, 0.0, 1.0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
     glPopMatrix()
 
-    # TODO: Right Arm (cylinders: radius=1.0, length=10)
+    # right arm
     glPushMatrix()
-    glTranslatef(-2.4, 9.0, 0.0)
-    glRotate(-90.0, 0.0, 1.0, 0.0)
+    glTranslatef(-2.4, 9.0, 0.0) # then translated the arm to the left (-x-axis) 2.4 units and up 9.0 units (+y-axis)
+    glRotatef(-90.0, 0.0, 1.0, 0.0) # first rotated the arm 90 degrees clockwise around the y-axis
     glColor3f(0.0, 0.0, 1.0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
     glPopMatrix()
