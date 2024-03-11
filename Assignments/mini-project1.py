@@ -6,6 +6,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
 width, height = 800, 600                                                    # width and height of the screen created
+angle = 0.0                                                                 # angle of rotation
 
 def drawAxes():                                                             # draw x-axis and y-axis
     glLineWidth(3.0)                                                        # specify line size (1.0 default)
@@ -21,27 +22,34 @@ def drawAxes():                                                             # dr
     glVertex3f(0.0, 0.0, 100.0)                                             # v1
     glEnd()
 
+
 # For Mini-project 1:
 # TODO: 1) Create a scarecrow as instructed and 2) Constantly rotate head and nose ONLY
-angle = 0 # global variable for the angle of rotation
-
 def draw_Scarecrow():                                                  # This is the drawing function drawing all graphics (defined by you)
     glClearColor(0, 0, 0, 1)                                                # set background RGBA color 
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)                        # clear the buffers initialized in the display mode
 
+    # rotation angle
+    global angle
+    angle += 5.0
+    if angle >= 360.0:
+        angle = 0.0
+
     # configure quatratic drawing
     quadratic = gluNewQuadric()
-    gluQuadricDrawStyle(quadratic, GLU_FILL)  
+    gluQuadricDrawStyle(quadratic, GLU_FILL)
 
     # head
     glPushMatrix()
-    glTranslatef(0.0, 12.5, 0.0) # translated sphere up 12.5 units +y-axis
+    glRotatef(angle, 0.0, 1.0, 0.0) # rotate around the y-axis by the global variable angle
+    glTranslatef(0.0, 12.5, 0.0) # translated the head up 12.5 units +y-axis
     glColor3f(0.0, 1.0, 0.0)
     gluSphere(quadratic, 2.5, 32, 32)
     glPopMatrix()
 
     # nose
     glPushMatrix()
+    glRotatef(angle, 0.0, 1.0, 0.0) # rotate around the y-axis by the global variable angle
     glTranslatef(0.0, 12.5, 2.5) # translated the nose up 12.5 units +y-axis and out 2.5 units +z-axis
     glColor3f(1.0, 0.0, 0.0)
     gluCylinder(quadratic, 0.3, 0.0, 1.8, 32, 32)
