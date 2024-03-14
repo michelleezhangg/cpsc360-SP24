@@ -133,8 +133,8 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-        draw() # function to draw the object
         spinningTransform(angle) # calling spinningTransform() (Q1)
+        draw() # function to draw the object
 
         # below are the code irrelevant to the assignment
         glPushMatrix()
