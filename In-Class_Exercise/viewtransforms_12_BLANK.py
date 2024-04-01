@@ -85,12 +85,12 @@ def draw_Scarecrow():                                                  # This is
 
 def main():
     pygame.init()                                                           # initialize a pygame program
-
+    
     #os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (100, 50)               # specify the position of the display window (default: screen center)
 
     glutInit()                                                              # initialize glut library 
 
-    screen = (width, height)                                                # specify the screen size of the new program window
+    screen = (width, height)                                                # specify displaly window's size
     display_window = pygame.display.set_mode(screen, DOUBLEBUF | OPENGL)    # create a display of size 'screen', use double-buffers and OpenGL
     pygame.display.set_caption('CPSC 360 - View Transform')                 # set title of the program window
 
@@ -99,15 +99,10 @@ def main():
     #glViewport(0, 0, width//2, height//2)                                  # use integer division to set viweport size be half of the window 
     glMatrixMode(GL_PROJECTION)                                             # set mode to projection transformation
     glLoadIdentity()                                                        # reset transf matrix to an identity
-    gluPerspective(45, (width / height), 0.1, 100.0)                        # specify perspective-projection view volume
+    gluPerspective(45, (width / height), 0.1, 100)                          # specify perspective-projection view volume
     #glOrtho(-40, 40, -30, 30, 40, 60)                                      # specify an orthogonal-projection view volume
 
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
-
-    # Static view: set camera's eye, look-at, and view-up in the world
-    #gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
-    #gluLookAt(50, 0, 0, 0, 0, 0, 0, 1, 0)                                   
-    #gluLookAt(0, 50, 0, 0, 0, 0, 0, 0, 1) 
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
     offset_z = 0
     while True:
@@ -135,19 +130,15 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     offset_z -= 1
 
-        #draw_Scarecrow()
-
         # reset the current model-view back to the initial matrix
         if (bResetModelMatrix):
             glLoadMatrixf(initmodelMatrix)
             offset_z = 0
-
         
-        # Dynamic View
         glPushMatrix()
         glLoadMatrixf(initmodelMatrix)
-        gluLookAt(0, 0, 50 - offset_z, 0, 0, 0, 0, 1, 0)
-        draw_Scarecrow()                                                    # model creation and geom transforms
+        gluLookAt(0, 0, 50-offset_z, 0, 0, 0, 0, 1, 0)                      # Dynamic view: change camera's z-coord using keyboard keys
+        draw_Scarecrow()                                                    # model creation and geom transforms should be below the camera (to be excuted before it)
         drawAxes()
         glPopMatrix()
 
