@@ -146,7 +146,7 @@ def main():
 
         #TODO: Q1: Modify the below gluLookAt()
         if whichQuestion == 1:
-            gluLookAt(0 - offset_x, 0 - offset_y, 50, 0 - offset_x, 0 - offset_y, 0, 0, 1, 0)
+            gluLookAt(0, 0, 50, 0 - offset_x, 0 - offset_y, 0, 0, 1, 0)
         #TODO: Q2: Modify the below gluLookAt()
         elif whichQuestion == 2:
             gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
