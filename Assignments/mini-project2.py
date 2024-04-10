@@ -124,13 +124,13 @@ def main():
                 if event.key == pygame.K_0:
                     bResetModelMatrix = True
                 elif event.key == pygame.K_UP: # move the view of the object up
-                    offset_y -= 1
-                elif event.key == pygame.K_DOWN: # move the view of the object down
                     offset_y += 1
+                elif event.key == pygame.K_DOWN: # move the view of the object down
+                    offset_y -= 1
                 elif event.key == pygame.K_LEFT: # move the view of the object left
-                    offset_x += 1
-                elif event.key == pygame.K_RIGHT: # move the view of the object right
                     offset_x -= 1
+                elif event.key == pygame.K_RIGHT: # move the view of the object right
+                    offset_x += 1
 
         # obtain the current model-view matrix after mouse rotation (if any)
         curmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
@@ -146,7 +146,7 @@ def main():
 
         #TODO: Q1: Modify the below gluLookAt()
         if whichQuestion == 1:
-            gluLookAt(0, 0, 50, 0 - offset_x, 0 - offset_y, 0, 0, 1, 0)
+            gluLookAt(0, 0, 50, 0 + offset_x, 0 + offset_y, 0, 0, 1, 0)
         #TODO: Q2: Modify the below gluLookAt()
         elif whichQuestion == 2:
             gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
