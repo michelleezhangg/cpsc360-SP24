@@ -123,13 +123,13 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_0:
                     bResetModelMatrix = True
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_UP: # move the view of the object up
                     offset_y -= 1
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN: # move the view of the object down
                     offset_y += 1
-                elif event.key == pygame.K_LEFT:
+                elif event.key == pygame.K_LEFT: # move the view of the object left
                     offset_x += 1
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT: # move the view of the object right
                     offset_x -= 1
 
         # obtain the current model-view matrix after mouse rotation (if any)
