@@ -8,7 +8,7 @@ from OpenGL.GLU import *
 import math
 
 width, height = 800, 600                                                    # width and height of the screen created
-whichQuestion = 1                                                           # 1: run Q1; 2: run Q2; 3: run Bonus
+whichQuestion = 2                                                           # 1: run Q1; 2: run Q2; 3: run Bonus
 
 def drawAxes():                                                             # draw x-axis and y-axis
     glLineWidth(3.0)                                                        # specify line size (1.0 default)
@@ -97,11 +97,12 @@ def main():
     glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)                                             # set mode to projection transformation
     glLoadIdentity()                                                        # reset transf matrix to an identity
-    glOrtho(-40, 40, -30, 30, 40, 60)                                       # specify an orthogonal-projection view volume
+    glOrtho(-40, 40, -30, 30, 20, 60)                                       # specify an orthogonal-projection view volume
 
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
     offset_x, offset_y = 0, 0
+    eye_x, eye_y, eye_z = 0, 0, 50
     while True:
         bResetModelMatrix = False
 
@@ -123,6 +124,8 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_0:
                     bResetModelMatrix = True
+
+                # Q1
                 elif event.key == pygame.K_UP: # move the view of the object up
                     offset_y += 1
                 elif event.key == pygame.K_DOWN: # move the view of the object down
@@ -132,6 +135,17 @@ def main():
                 elif event.key == pygame.K_RIGHT: # move the view of the object right
                     offset_x += 1
 
+
+                # Q2
+                elif event.key == pygame.K_a: # see the right-side of the model
+                    eye_x, eye_y, eye_z = -50, 0, 0
+                elif event.key == pygame.K_d: # see the left-side of the model
+                    eye_x, eye_y, eye_z = 50, 0, 0
+                elif event.key == pygame.K_s: # see the front-side of the model
+                    eye_x, eye_y, eye_z = 0, 0, 50
+                elif event.key == pygame.K_w: # see the back-side of the model
+                    eye_x, eye_y, eye_z = 0, 0, -50
+
         # obtain the current model-view matrix after mouse rotation (if any)
         curmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
 
@@ -139,6 +153,7 @@ def main():
         if (bResetModelMatrix):
             glLoadMatrixf(initmodelMatrix)
             offset_x, offset_y = 0, 0
+            eye_x, eye_y, eye_z = 0, 0, 50
         
         # transform the camera and draw the model
         glPushMatrix()
@@ -146,10 +161,10 @@ def main():
 
         #TODO: Q1: Modify the below gluLookAt()
         if whichQuestion == 1:
-            gluLookAt(0, 0, 50, 0 + offset_x, 0 + offset_y, 0, 0, 1, 0)
+            gluLookAt(0, 0, 50, offset_x, offset_y, 0, 0, 1, 0)
         #TODO: Q2: Modify the below gluLookAt()
         elif whichQuestion == 2:
-            gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
+            gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, 0, 1, 0)
         #TODO: Bonus: Modify the below gluLookAt()
         elif whichQuestion == 3:
             gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
