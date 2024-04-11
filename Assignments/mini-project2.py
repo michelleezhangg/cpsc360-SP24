@@ -97,12 +97,13 @@ def main():
     glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)                                             # set mode to projection transformation
     glLoadIdentity()                                                        # reset transf matrix to an identity
-    glOrtho(-40, 40, -30, 30, 20, 60)                                       # specify an orthogonal-projection view volume
+    glOrtho(-40, 40, -30, 30, 20, 100)                                       # specify an orthogonal-projection view volume
 
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
     offset_x, offset_y = 0, 0
     eye_x, eye_y, eye_z = 0, 0, 50
+    viewup_x, viewup_y, viewup_z = 0, 1, 0
     while True:
         bResetModelMatrix = False
 
@@ -139,12 +140,22 @@ def main():
                 # Q2
                 elif event.key == pygame.K_a: # see the right-side of the model
                     eye_x, eye_y, eye_z = -50, 0, 0
+                    viewup_x, viewup_y, viewup_z = 0, 1, 0
                 elif event.key == pygame.K_d: # see the left-side of the model
                     eye_x, eye_y, eye_z = 50, 0, 0
+                    viewup_x, viewup_y, viewup_z = 0, 1, 0
                 elif event.key == pygame.K_s: # see the front-side of the model
                     eye_x, eye_y, eye_z = 0, 0, 50
+                    viewup_x, viewup_y, viewup_z = 0, 1, 0
                 elif event.key == pygame.K_w: # see the back-side of the model
                     eye_x, eye_y, eye_z = 0, 0, -50
+                    viewup_x, viewup_y, viewup_z = 0, 1, 0
+                elif event.key == pygame.K_q: # see the top-side of the model
+                    eye_x, eye_y, eye_z = 0, 50, 0
+                    viewup_x, viewup_y, viewup_z = 0, 0, 1
+                elif event.key == pygame.K_e: # see the bottom-side of the model
+                    eye_x, eye_y, eye_z = 0, -50, 0
+                    viewup_x, viewup_y, viewup_z = 0, 0, 1
 
         # obtain the current model-view matrix after mouse rotation (if any)
         curmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
@@ -154,6 +165,7 @@ def main():
             glLoadMatrixf(initmodelMatrix)
             offset_x, offset_y = 0, 0
             eye_x, eye_y, eye_z = 0, 0, 50
+            viewup_x, viewup_y, viewup_z = 0, 1, 0
         
         # transform the camera and draw the model
         glPushMatrix()
@@ -164,7 +176,7 @@ def main():
             gluLookAt(0, 0, 50, offset_x, offset_y, 0, 0, 1, 0)
         #TODO: Q2: Modify the below gluLookAt()
         elif whichQuestion == 2:
-            gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, 0, 1, 0)
+            gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, viewup_x, viewup_y, viewup_z)
         #TODO: Bonus: Modify the below gluLookAt()
         elif whichQuestion == 3:
             gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)
