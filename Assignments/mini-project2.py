@@ -8,7 +8,7 @@ from OpenGL.GLU import *
 import math
 
 width, height = 800, 600                                                    # width and height of the screen created
-whichQuestion = 3                                                           # 1: run Q1; 2: run Q2; 3: run Bonus
+whichQuestion = 3                                                           # 1: run Q1; 2: run Q2; 3: run Bonus; 4: run Extra Credit
 
 def drawAxes():                                                             # draw x-axis and y-axis
     glLineWidth(3.0)                                                        # specify line size (1.0 default)
@@ -105,6 +105,7 @@ def main():
     eye_x, eye_y, eye_z = 0, 0, 50
     viewup_x, viewup_y, viewup_z = 0, 1, 0
     degrees = 0
+    bounce = 1
 
     while True:
         bResetModelMatrix = False
@@ -168,25 +169,39 @@ def main():
             offset_x, offset_y = 0, 0
             eye_x, eye_y, eye_z = 0, 0, 50
             viewup_x, viewup_y, viewup_z = 0, 1, 0
+            degrees = 0
+            bounce = 1
         
         # transform the camera and draw the model
         glPushMatrix()
         glLoadMatrixf(initmodelMatrix)
 
         # Bonus: rotate the scarecrow
-        degrees += 1
-        eye_x = 50 * math.cos(math.radians(degrees))
-        eye_z = 50 * math.sin(math.radians(degrees))
+        if whichQuestion == 3 or whichQuestion == 4:
+            degrees += 1
+            eye_x = 50 * math.cos(math.radians(degrees))
+            eye_z = 50 * math.sin(math.radians(degrees))
+        
+        # Extra Credit: bouncing camera
+        if whichQuestion == 4:
+            eye_y += bounce
+            if eye_y >= 50:
+                up_down = -1
+            elif eye_y <= -50:
+                up_down = 1
 
         #TODO: Q1: Modify the below gluLookAt()
         if whichQuestion == 1:
-            gluLookAt(0, 0, 50, offset_x, offset_y, 0, 0, 1, 0)
+            gluLookAt(offset_x, offset_y, 50, offset_x, offset_y, 0, 0, 1, 0)
         #TODO: Q2: Modify the below gluLookAt()
         elif whichQuestion == 2:
             gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, viewup_x, viewup_y, viewup_z)
         #TODO: Bonus: Modify the below gluLookAt()
         elif whichQuestion == 3:
             gluLookAt(eye_x, 20, eye_z, 0, 0, 0, 0, 1, 0)
+        #TODO: Extra Credit: bouncing camera movement
+        elif whichQuestion == 4:
+            gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, 0, 1, 0)
         
         glPushMatrix()
         glMultMatrixf(curmodelMatrix) # multiply with the m-v matrix after mouse rotation
