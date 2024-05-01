@@ -39,7 +39,7 @@ def draw():
 
     triangle = [0, 1, 2]
 
-    #glEnable(GL_DEPTH_TEST)                                                # enable depth test: fragments with larger depth values, i.e., farther away from the camera, draws at last
+    glEnable(GL_DEPTH_TEST)                                                # enable depth test: fragments with larger depth values, i.e., farther away from the camera, draws at last
 
     # draw triangle B (RED)
     glBegin(GL_TRIANGLES)
